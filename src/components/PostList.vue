@@ -17,7 +17,11 @@ import apiService from '@/services/apiService';
     }
 })
 export default class PostList extends Vue {
-    posts: any[] = [];
+    
+    
+    get posts(): any {
+        return this.$store.getters.getPostList;
+    }
 
     created(){
         this.retrievePosts();
@@ -25,14 +29,15 @@ export default class PostList extends Vue {
 
     retrievePosts(){
         apiService.sendGetRequest('posts', {_limit : 10}).then(data => {
-            this.posts = data.map((a: any) => ({title: a.title, id: a.id }));
+            const posts = data.map((a: any) => ({title: a.title, id: a.id }));
+            this.$store.dispatch('addPostList', posts);
         })
     }
 
-    onDeletePost(id: number){
-        const index = this.posts.findIndex(obj => obj.id == id)
-        this.posts.splice(index, 1);
-    }
+    // onDeletePost(id: number){
+    //     const index = this.posts.findIndex(obj => obj.id == id)
+    //     this.posts.splice(index, 1);
+    // }
 }
 
 

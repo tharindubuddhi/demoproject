@@ -10,7 +10,7 @@
     import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 
 @Component({})
-export default class PostList extends Vue {
+export default class Post extends Vue {
     @Prop() message: string | undefined;
     @Prop() id: number | undefined;
 
@@ -19,11 +19,11 @@ export default class PostList extends Vue {
     }
 
     deletePost(){
-        this.onDeletePost(this.id!);
+        this.$store.dispatch('deletePost', this.id);
     }
 
     /* eslint-disable @typescript-eslint/no-empty-function */
-    @Emit('onDeletePost') onDeletePost(id: number){}
+    //@Emit('onDeletePost') onDeletePost(id: number){}
     /* eslint-enable @typescript-eslint/no-empty-function */
 }
 </script>
