@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import PostDetails from '@/components/PostDetails.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -10,6 +10,12 @@ const routes: Array<RouteConfig> = [
     name: 'Home',
     component: Home
   },
+  {
+    path: '/postdetails/:id',
+    name: 'PostDetails',
+    component: PostDetails,
+  },
+  
   {
     path: '/about',
     name: 'About',
