@@ -1,6 +1,8 @@
 <template>
 <div>
-    <Post :key="post.id" v-for="post in posts" :message="post.title" :id="post.id"></Post>
+    <Post :key="post.id" v-for="post in posts" 
+    @onDeletePost="onDeletePost"
+    :message="post.title" :id="post.id"/>
 </div>
 </template>
 
@@ -25,6 +27,11 @@ export default class PostList extends Vue {
         apiService.sendGetRequest('posts', {_limit : 10}).then(data => {
             this.posts = data.map((a: any) => ({title: a.title, id: a.id }));
         })
+    }
+
+    onDeletePost(id: number){
+        const index = this.posts.findIndex(obj => obj.id == id)
+        this.posts.splice(index, 1);
     }
 }
 
